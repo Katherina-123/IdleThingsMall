@@ -134,27 +134,28 @@ var app = new Vue({
         window.jiantingemail = this.jiantingemail;
     },
     methods: {
-        jiantingphone: function () {
-            var phone=$("#userphone").val();
-            if(phone.length==0){
-                layer.tips("请输入手机号", '#userphone', {
-                    tips: [1, "#0FA6D8"],
-                    tipsMore: !1,
-                    time: 1300
-                });
-                $("#userphone").focus();
-                return 0;
-            }else if(!re.test(phone)){
-                layer.tips("请输入合法的手机号", '#userphone', {
-                    tips: [1, "#FF5722"],
-                    tipsMore: !1,
-                    time: 1300
-                });
-                $("#userphone").focus();
-                return 0;
-            }
-            return 1;
-        },jiantingemail:function () {
+        // jiantingphone: function () {
+        //     var phone=$("#userphone").val();
+        //     if(phone.length==0){
+        //         layer.tips("请输入手机号", '#userphone', {
+        //             tips: [1, "#0FA6D8"],
+        //             tipsMore: !1,
+        //             time: 1300
+        //         });
+        //         $("#userphone").focus();
+        //         return 0;
+        //     }else if(!re.test(phone)){
+        //         layer.tips("请输入合法的手机号", '#userphone', {
+        //             tips: [1, "#FF5722"],
+        //             tipsMore: !1,
+        //             time: 1300
+        //         });
+        //         $("#userphone").focus();
+        //         return 0;
+        //     }
+        //     return 1;
+        // },jiantingemail:function () {
+        jiantingemail:function () {
             var email=$("#useremail").val();
             if(email.length==0){
                 layer.tips("请输入邮箱", '#useremail', {

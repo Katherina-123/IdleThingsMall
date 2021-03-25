@@ -48,8 +48,17 @@ public class LoginController {
     @Autowired
     private UserRoleService userRoleService;
     /**手机号和注册验证码map集合*/
+
+
+    /**要改*/
+    /**邮箱和注册验证码map集合*/
+    private static Map<String, String> mailcodemap1 = new HashMap<>();
     private static Map<String, String> phonecodemap1 = new HashMap<>();
     /**手机号和重置密码验证码map集合*/
+
+    /**要改*/
+    /**邮箱和注册验证码map集合*/
+    private static Map<String, String> mailcodemap2 = new HashMap<>();
     private static Map<String, String> phonecodemap2 = new HashMap<>();
     /**
      *图片验证码
@@ -287,6 +296,9 @@ public class LoginController {
      * 2.查询手机号是否存在
      * 3.判断验证码是否有效或正确
      * 4.重置密码
+     *
+     * 要改
+     * 改为邮箱
      * */
     @ResponseBody
     @PostMapping("/user/resetpwd")
