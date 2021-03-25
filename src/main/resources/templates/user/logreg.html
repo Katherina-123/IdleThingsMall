@@ -71,13 +71,21 @@
                 <span>密码</span>
                 <input type="password" autocomplete="off" placeholder="请输入密码" id="password2" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
             </label>
+<!--            <label>-->
+<!--                <span>验证码</span>-->
+<!--                <input type="text" autocomplete="off" placeholder="请输入短信验证码" id="phonevercode"  onkeyup="this.value=this.value.replace(/\s+/g,'')"/>-->
+<!--            </label>-->
+<!--            <label>-->
+<!--                <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid " id="LAY-user-getsmscode"-->
+<!--                        onclick="getphonecode()">获取短信验证码</button>-->
+<!--            </label>-->
             <label>
                 <span>验证码</span>
-                <input type="text" autocomplete="off" placeholder="请输入短信验证码" id="phonevercode"  onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
+                <input type="text" autocomplete="off" placeholder="请输入验证码" id="vercodereg" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
             </label>
             <label>
-                <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid " id="LAY-user-getsmscode"
-                        onclick="getphonecode()">获取短信验证码</button>
+                <img th:src="@{/images}" title="看不清，请点击图片刷新" width="128px"
+                     height="33px" id="imagereg" onclick="getcode(this)"/>
             </label>
             <button type="button" id="submitrg" class="submit" style="margin-top:10px" onclick="submitregister()">注 册</button>
         </div>

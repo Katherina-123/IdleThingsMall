@@ -7,6 +7,7 @@ import com.entity.UserRole;
 import com.service.LoginService;
 import com.service.UserInfoService;
 import com.service.UserRoleService;
+import com.sun.xml.bind.v2.TODO;
 import com.util.*;
 import com.vo.ResultVo;
 import net.sf.json.JSONObject;
@@ -37,8 +38,6 @@ import java.util.concurrent.TimeUnit;
  *  登录注册 控制器
  * </p>
  *
- * @author hlt
- * @since 2019-12-21
  */
 @Controller
 public class LoginController {
@@ -71,6 +70,13 @@ public class LoginController {
      * 3.判断手机号是否已经注册过
      * 4.发送注册验证码并存入map集合
      * */
+
+     /**改为发送邮箱
+     *
+     */
+//     @ResponseBody
+//     @PostMapping("/user/sendmailcode")
+
     @ResponseBody
     @PostMapping("/user/sendregcode")
     public ResultVo sendregcode(HttpServletRequest request) throws IOException{
@@ -95,16 +101,7 @@ public class LoginController {
         if(result == 1){//发送成功
             phonecodemap1.put(mobilephone, code);//放入map集合进行对比
 
-/*
-            final Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    phonecodemap1.remove(phoneNum);
-                    timer.cancel();
-                }
-            }, 5 * 60 * 1000);
-*/
+
             //执行定时任务
             ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1,
                     new BasicThreadFactory.Builder().namingPattern("example-schedule-pool-%d").daemon(true).build());
@@ -129,6 +126,10 @@ public class LoginController {
      * 4.判断验证码是否有效或正确
      * 5.注册
      * */
+
+    /**改为发送邮箱
+     *
+     */
     @ResponseBody
     @PostMapping("/user/register")
     public  ResultVo userReg(@RequestBody UserInfo userInfo, HttpSession session) {
