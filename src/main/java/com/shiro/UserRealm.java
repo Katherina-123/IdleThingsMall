@@ -4,7 +4,7 @@ import com.entity.Login;
 import com.service.LoginService;
 import com.service.UserPermService;
 import com.service.UserRoleService;
-import com.util.JustPhone;
+import com.util.JustEmail;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -55,7 +55,7 @@ public class UserRealm extends AuthorizingRealm {
         UsernamePasswordToken token=(UsernamePasswordToken) authenticationToken;
         Login login = new Login();
         //如果传入的是用户名
-        if (!JustPhone.justPhone(token.getUsername())) {
+        if (!JustEmail.justEmail(token.getUsername())) {
             login.setUsername(token.getUsername());
         }else {//如果传入的是手机号
             login.setMobilephone(token.getUsername());

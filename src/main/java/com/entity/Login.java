@@ -12,8 +12,8 @@ import java.io.Serializable;
  * 
  * </p>
  *
- * @author hlt
- * @since 2019-12-25
+ * @author kath
+ * @since 2021-2-25
  */
 @AllArgsConstructor//全参构造
 @NoArgsConstructor//无参构造
@@ -47,6 +47,10 @@ public class Login implements Serializable {
      * 手机号
      */
     private String mobilephone;
+    /**
+     * 邮箱
+     */
+    private String email;
     /**
      * 1正常 0封号
      */

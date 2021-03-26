@@ -2,7 +2,7 @@ package com.controller.admin;
 
 import com.entity.*;
 import com.service.*;
-import com.util.JustPhone;
+import com.util.JustEmail;
 import com.util.KeyUtil;
 import com.util.StatusCode;
 import com.util.ValidateCode;
@@ -66,7 +66,7 @@ public class AdminController {
             return new ResultVo(false,StatusCode.ERROR,"请输入正确的验证码");
         }
         //判断输入的账号是否手机号
-        if (!JustPhone.justPhone(account)) {
+        if (!JustEmail.justEmail(account)) {
             //输入的是用户名
             String username = account;
             //盐加密
