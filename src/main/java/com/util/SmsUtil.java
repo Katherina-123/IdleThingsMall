@@ -14,7 +14,7 @@ import org.json.JSONObject;
 public class SmsUtil {
     /**发送短信*/
     public Integer SendMsg(String PhoneNumbers, String TemplateParam,Integer type) {
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI5tRuC3DTnUPtaKnFZBLF", "THb8iDy4dbuRELLnYkH3uUH2zfsSEe");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "AccessKeyId", "Secret");
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();
         //request.setProtocol(ProtocolType.HTTPS);
