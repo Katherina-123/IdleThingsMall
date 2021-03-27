@@ -180,15 +180,15 @@ var app = new Vue({
 });
 
 function submitregister() {
-    // var phone=$("#userphone").val();
+    var phone=$("#userphone").val();
     var nickname=$("#nickname").val();
     var password2=$("#password2").val();
     var useremail=$("#useremail").val();
-    var emailvercode=$("#emailvercode").val();
-    // var t=jiantingphone();
-    // if(t==0){
-    //     return;
-    // }
+    var phonevercode=$("#phonevercode").val();
+    var t=jiantingphone();
+    if(t==0){
+        return;
+    }
     var e=jiantingemail();
     if(e==0){
         return;
@@ -220,49 +220,32 @@ function submitregister() {
         $("#password2").focus();
         return;
     }
-    //改为email注册
-    // if (phonevercode.length === 0) {
-    //     layer.tips("请输入验证码", '#phonevercode', {
-    //         tips: [1, "#0FA6D8"],
-    //         tipsMore: !1,
-    //         time: 1300
-    //     });
-    //     $("#phonevercode").focus();
-    //     return;
-    // } else if (phonevercode.length != 6) {
-    //     layer.tips("请输入正确验证码", '#phonevercode', {
-    //         tips: [1, "#FF5722"],
-    //         tipsMore: !1,
-    //         time: 1300
-    //     });
-    //     $("#phonevercode").focus();
-    //     return;
-    // }
-    if (emailvercode.length === 0) {
-        layer.tips("请输入验证码", '#emailvercode', {
+    if (phonevercode.length === 0) {
+        layer.tips("请输入验证码", '#phonevercode', {
             tips: [1, "#0FA6D8"],
             tipsMore: !1,
             time: 1300
         });
-        $("#emailvercode").focus();
+        $("#phonevercode").focus();
         return;
-    } else if (emailvercode.length != 6) {
-        layer.tips("请输入正确验证码", '#emailvercode', {
+    } else if (phonevercode.length != 6) {
+        layer.tips("请输入正确验证码", '#phonevercode', {
             tips: [1, "#FF5722"],
             tipsMore: !1,
             time: 1300
         });
-        $("#emailvercode").focus();
+        $("#phonevercode").focus();
         return;
     }
+
     $("#submitrg").addClass("layui-btn-disabled");
     $("#submitrg").attr("disabled", true);
     var object = new Object(); //创建一个存放数据的对象
     object["username"] = nickname;
-    // object["mobilephone"] = phone;
+    object["mobilephone"] = phone;
     object["password"] = password2;
     object["email"] = useremail;
-    object["vercode"] = emailvercode;
+    object["vercode"] = phonevercode;
 
     var jsonData = JSON.stringify(object); //根据数据生成json数据
     $.ajax({
@@ -336,17 +319,17 @@ if(Cookies.get('times') != undefined){
     $("#LAY-user-getsmscode").removeClass("layui-btn-disabled");
     $("#LAY-user-getsmscode").attr("disabled", false);
 }
-//获取邮箱验证码 TODO
-function getmailcode() {
+//获取短信验证
+function getphonecode() {
     //判断邮箱是否合法
-    var t=jiantingemail();
+    var t=jiantingphone();
     if(t==0){
         return;
     }
     //ajax到后台
-    var email=$("#useremail").val();
+    var phone=$("#userphone").val();
     var object = new Object(); //创建一个存放数据的对象
-    object["email"] = email;
+    object["mobilephone"] = phone;
     object["type"] = 0;
     var jsonData = JSON.stringify(object); //根据数据生成json数据
     $.ajax({
@@ -399,68 +382,68 @@ function getmailcode() {
         }
     });
 }
-// function getphonecode() {
-//     //判断手机号是否合法
-//     var t=jiantingphone();
-//     if(t==0){
-//         return;
-//     }
-//     //ajax到后台
-//     var phone=$("#userphone").val();
-//     var object = new Object(); //创建一个存放数据的对象
-//     object["mobilephone"] = phone;
-//     object["type"] = 0;
-//     var jsonData = JSON.stringify(object); //根据数据生成json数据
-//     $.ajax({
-//         url: basePath + "/user/sendregcode",
-//         data: jsonData,
-//         contentType: "application/json;charset=UTF-8", //发送数据的格式
-//         type: "post",
-//         dataType: "json", //回调
-//         beforeSend: function () {
-//             layer.load(1, { //icon支持传入0-2
-//                 content: '发送中...',
-//                 success: function (layero) {
-//                     layero.find('.layui-layer-content').css({
-//                         'padding-top': '39px',
-//                         'width': '60px'
-//                     });
-//                 }
-//             });
-//         },
-//         complete: function () {
-//             layer.closeAll('loading');
-//         },
-//         success: function (data) {
-//             if (data.status == 200) {
-//                 layer.msg(data.message, {
-//                     time: 1000,
-//                     icon: 1,
-//                     offset: '100px'
-//                 });
-//                 p_timer = window.setInterval('timers()', 1000);
-//             } else if (data.status == 201) {
-//                 layer.msg(data.message, {
-//                     time: 1000,
-//                     icon: 2,
-//                     offset: '100px'
-//                 });
-//             }else if (data.status == 203){
-//                 layer.msg(data.message, {
-//                     time: 1000,
-//                     icon: 2,
-//                     offset: '100px'
-//                 });
-//             }
-//         },error:function () {
-//             layer.msg("系统错误", {
-//                 time: 1000,
-//                 icon: 2,
-//                 offset: '100px'
-//             });
-//         }
-//     });
-// }
+function getphonecode() {
+    //判断手机号是否合法
+    var t=jiantingphone();
+    if(t==0){
+        return;
+    }
+    //ajax到后台
+    var phone=$("#userphone").val();
+    var object = new Object(); //创建一个存放数据的对象
+    object["mobilephone"] = phone;
+    object["type"] = 0;
+    var jsonData = JSON.stringify(object); //根据数据生成json数据
+    $.ajax({
+        url: basePath + "/user/sendregcode",
+        data: jsonData,
+        contentType: "application/json;charset=UTF-8", //发送数据的格式
+        type: "post",
+        dataType: "json", //回调
+        beforeSend: function () {
+            layer.load(1, { //icon支持传入0-2
+                content: '发送中...',
+                success: function (layero) {
+                    layero.find('.layui-layer-content').css({
+                        'padding-top': '39px',
+                        'width': '60px'
+                    });
+                }
+            });
+        },
+        complete: function () {
+            layer.closeAll('loading');
+        },
+        success: function (data) {
+            if (data.status == 200) {
+                layer.msg(data.message, {
+                    time: 1000,
+                    icon: 1,
+                    offset: '100px'
+                });
+                p_timer = window.setInterval('timers()', 1000);
+            } else if (data.status == 201) {
+                layer.msg(data.message, {
+                    time: 1000,
+                    icon: 2,
+                    offset: '100px'
+                });
+            }else if (data.status == 203){
+                layer.msg(data.message, {
+                    time: 1000,
+                    icon: 2,
+                    offset: '100px'
+                });
+            }
+        },error:function () {
+            layer.msg("系统错误", {
+                time: 1000,
+                icon: 2,
+                offset: '100px'
+            });
+        }
+    });
+}
 //倒计时
 function timers() {
     if (time == 0) {

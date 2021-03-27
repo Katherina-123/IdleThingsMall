@@ -44,7 +44,7 @@ public class UserController {
     @Autowired
     private UserInfoService userInfoService;
     /**手机号和更换手机号验证码map集合*/
-    private static Map<String, String> emailcodemap = new HashMap<>();
+    private static Map<String, String> phonecodemap = new HashMap<>();
     /**
      * 修改密码
      * 1.前端传入旧密码（oldpwd）、新密码（newpwd）
@@ -181,44 +181,32 @@ public class UserController {
     @PostMapping("/user/sendupdatephone")
     public ResultVo sendupdatephone(HttpServletRequest request) throws IOException {
         JSONObject json = JsonReader.receivePost(request);
-        final String email = json.getString("email");
+        final String mobilephone = json.getString("mobilephone");
         Integer type = json.getInt("type");
         Login login = new Login();
         if(type!=2){
             return new ResultVo(false,StatusCode.ACCESSERROR,"违规操作");
         }
-        if (!JustEmail.justEmail(email)) {//判断输入的手机号格式是否正确
+        if (!PhoneRight.phoneRight(mobilephone)) {//判断输入的手机号格式是否正确
             return new ResultVo(false,StatusCode.ERROR,"请输入正确格式的手机号");
         }
         //查询手机号是否存在
-        login.setMobilephone(email);
+        login.setMobilephone(mobilephone);
         Login userIsExist = loginService.userLogin(login);
         if (!StringUtils.isEmpty(userIsExist)){//若手机号已注册过
             return new ResultVo(false, StatusCode.REPERROR,"手机号已存在");
         }
-        String code = GetCode.emailcode();
-        Integer result = new SmsUtil().SendMsg(email, code, type);//发送验证码
+        String code = GetCode.phonecode();
+        Integer result = new SmsUtil().SendMsg(mobilephone, code, type);//发送验证码
         if(result == 1) {//发送成功
-            emailcodemap.put(email, code);//放入map集合进行对比
-
-/*
-            final Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    phonecodemap2.remove(phoneNum);
-                    timer.cancel();
-                }
-            }, 5 * 60 * 1000);
-*/
-
+            phonecodemap.put(mobilephone, code);//放入map集合进行对比
             //执行定时任务
             ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1,
                     new BasicThreadFactory.Builder().namingPattern("example-schedule-pool-%d").daemon(true).build());
             executorService.scheduleAtFixedRate(new Runnable() {
                 @Override
                 public void run() {
-                    emailcodemap.remove(email);
+                    phonecodemap.remove(mobilephone);
                     ((ScheduledThreadPoolExecutor) executorService).remove(this::run);
                 }
             },5 * 60 * 1000,5 * 60 * 1000, TimeUnit.HOURS);
@@ -231,6 +219,8 @@ public class UserController {
         }
         return new ResultVo(false,StatusCode.REMOTEERROR,"验证码发送失败");
     }
+
+
 
     /**
      * 修改绑定手机号

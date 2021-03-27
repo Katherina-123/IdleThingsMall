@@ -55,10 +55,10 @@
         </div>
         <div class="form sign-up" id="registers" style="margin-top:-25px">
             <h2>Register Right Now!</h2>
-<!--            <label>-->
-<!--                <span>手机号</span>&lt;!&ndash; @blur="jiantingphone()"/>&ndash;&gt;-->
-<!--                <input type="text" autocomplete="off" placeholder="请输入账号" id="userphone" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>-->
-<!--            </label>-->
+            <label>
+                <span>手机号</span><!-- @blur="jiantingphone()"/>-->
+                <input type="text" autocomplete="off" placeholder="请输入账号" id="userphone" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
+            </label>
             <label>
                 <span>用户名</span>
                 <input type="text" autocomplete="off" placeholder="请输入用户名" id="nickname"/>
@@ -73,12 +73,11 @@
             </label>
             <label>
                 <span>验证码</span>
-<!--                id原为phonevercode-->
-                <input type="text" autocomplete="off" placeholder="请输入邮箱验证码" id="emailvercode"  onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
+                <input type="text" autocomplete="off" placeholder="请输入手机验证码" id="phonevercode"  onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
             </label>
             <label>
                 <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid " id="LAY-user-getsmscode"
-                        onclick="getmailcode()">获取邮箱验证码</button>
+                        onclick="getphonecode()">获取短信验证码</button>
             </label>
             <button type="button" id="submitrg" class="submit" style="margin-top:10px" onclick="submitregister()">注 册</button>
         </div>

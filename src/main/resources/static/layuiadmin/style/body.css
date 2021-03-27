@@ -35,7 +35,8 @@ html{
 	height: 100%;
 }
 body{
-   background:url(../../images/cloud.jpg) 0 bottom repeat-x  #049ec4;
+   /*background:url(../../images/adminbck.jpg) 0 bottom repeat-x #6cac34;*/
+  background: 0 bottom repeat-x #6cac34;
   -webkit-animation: animate-cloud 20s linear infinite;
   -moz-animation: animate-cloud 20s linear infinite;
   -ms-animation: animate-cloud 20s linear infinite;
